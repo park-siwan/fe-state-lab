@@ -8,7 +8,7 @@ import './Counter.css';
 // A. 셀렉터 없이 스토어 전체를 구독
 function CounterA() {
   const { count, increase } = useCounterStore();
-  return <CounterCard label='A. 통째로' count={count} onIncrease={increase} />;
+  return <CounterCard label='1. 셀렉터 없이 통째로' count={count} onIncrease={increase} />;
 }
 
 // B. useShallow 로 필요한 값만 묶어서 구독
@@ -16,14 +16,14 @@ function CounterB() {
   const { count, increase } = useCounterStore(
     useShallow((s) => ({ count: s.count, increase: s.increase })),
   );
-  return <CounterCard label='B. useShallow' count={count} onIncrease={increase} />;
+  return <CounterCard label='2. useShallow' count={count} onIncrease={increase} />;
 }
 
 // C. 값은 셀렉터로, 액션은 참조가 바뀌지 않는 actions 객체로 구독
 function CounterC() {
   const count = useCounterStore((s) => s.count);
   const { increase } = useCounterStore((s) => s.actions);
-  return <CounterCard label='C. actions 분리' count={count} onIncrease={increase} />;
+  return <CounterCard label='3. 액션 분리' count={count} onIncrease={increase} />;
 }
 
 function CounterCard({
